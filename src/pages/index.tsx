@@ -1,114 +1,313 @@
-import Image from "next/image";
-import { Geist, Geist_Mono } from "next/font/google";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { useState, useEffect, useRef } from "react";
+import Header from "@/components/main/header";
+import Footer from "@/components/main/footer";
+import MouseTrail from "@/components/main/mouse";
+import XShape from "@/components/main/xShape";
+import Tes from "@/components/main/tes";
+import Foto from "@/components/main/foto";
+import Script from "next/script";
+import { motion, AnimatePresence } from "framer-motion";
+import About from "@/components/main/about";
+import Contact from "@/components/main/contact";
 
 export default function Home() {
-  return (
-    <div
-      className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
-    >
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/pages/index.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const baseColors = [
+    "#ff0000", "#fd0071", "#e700b0", "#c03adb", "#8b6de7",
+    "#4490d7", "#00a5c6", "#00b7bb", "#00c6a7", "#00d189",
+    "#00d562", "#30d128"
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+  const [firstLoad, setFirstLoad] = useState(true);
+
+  const [gradientRotate, setGradientRotate] = useState("");
+  const [gradient, setGradient] = useState("");
+  const [activeSection, setActiveSection] = useState("home"); 
+  const [fadeOut, setFadeOut] = useState(false);
+  const [homeSectionVisible, setHomeSectionVisible] = useState(true); 
+  const [aboutSectionVisible, setAboutSectionVisible] = useState(false);
+  const [contactSectionVisible, setContactSectionVisible] = useState(false);
+
+  const homeRef = useRef(null);
+  const aboutRef = useRef(null);
+  const contactRef = useRef(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      document.dispatchEvent(
+        new CustomEvent("setSpeechText", {
+          detail: {
+            text: "Welcome!",
+            text2: "What would you like to see?",
+          },
+        })
+      );
+    }, 500);
+
+  }, []);
+
+  useEffect(() => {
+
+    if(firstLoad == true){
+      document.dispatchEvent(
+        new CustomEvent("setSpeechText", {
+          detail: {
+            text: "Welcome!" ,
+            text2: "What Would you like to see?", 
+          },
+        })
+      );
+      setFirstLoad(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setHomeSectionVisible(true); 
+          setActiveSection("home");
+          document.dispatchEvent(
+            new CustomEvent("setSpeechText", {
+              detail: {
+                text: "Welcome!" ,
+                text2: "What Would you like to see?", 
+              },
+            })
+          );
+        } else {
+          
+          setHomeSectionVisible(false);
+        }
+      },
+      {
+        threshold: 0.1, 
+      }
+    );
+
+    if (homeRef.current) {
+      observer.observe(homeRef.current);
+    }
+
+    return () => {
+      if (homeRef.current) {
+        observer.unobserve(homeRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActiveSection("about");
+          setAboutSectionVisible(true); 
+          document.dispatchEvent(
+            new CustomEvent("setSpeechText", {
+              detail: {
+                text: "Let's move on to about me section!" ,
+                text2: 'There are only 3 things here at the moment... 🫠', 
+              },
+            })
+          );
+        } else {
+          setAboutSectionVisible(false); 
+        }
+      },
+      {
+        threshold: 0.1, 
+      }
+    );
+
+    if (aboutRef.current) {
+      observer.observe(aboutRef.current);
+    }
+
+    return () => {
+      if (aboutRef.current) {
+        observer.unobserve(aboutRef.current);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setActiveSection("contact");
+          setContactSectionVisible(true); 
+          document.dispatchEvent(
+            new CustomEvent("setSpeechText", {
+              detail: {
+                text: "Let's see how to contact me!" ,
+                text2: 'I hope we can make great things together! 😀', 
+              },
+            })
+          );
+        } else {
+          
+          setContactSectionVisible(false);
+        }
+      },
+      {
+        threshold: 0.1, 
+      }
+    );
+
+    if (contactRef.current) {
+      observer.observe(contactRef.current);
+    }
+
+    return () => {
+      if (contactRef.current) {
+        observer.unobserve(contactRef.current);
+      }
+    };
+  }, []);
+
+  const handleScrollToHome = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      const homeSection = document.getElementById("home");
+      if (homeSection) {
+        homeSection.scrollIntoView({ behavior: "smooth" });
+      }
+      
+      setFadeOut(false);
+    }, 500);
+
+    setActiveSection("home");
+  };
+
+  const handleScrollToAbout = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      const aboutSection = document.getElementById("about");
+      if (aboutSection) {
+        aboutSection.scrollIntoView({ behavior: "smooth" });
+      }
+      
+      setFadeOut(false);
+    }, 500);
+
+    setActiveSection("about");
+  };
+
+  const handleScrollToContact = () => {
+    setFadeOut(true);
+    setTimeout(() => {
+      const contactSection = document.getElementById("contact");
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: "smooth" });
+      }
+      setFadeOut(false);
+    }, 500);
+
+    setActiveSection("contact");
+  };
+
+  useEffect(() => {
+    let currentIndex = 0;
+    let forward = true;
+
+    const colorInterval = setInterval(() => {
+      const nextIndex = forward ? currentIndex + 1 : currentIndex - 1;
+      const nextColor = `${baseColors[currentIndex]}, ${baseColors[nextIndex]}`;
+
+      setGradientRotate(`conic-gradient(${nextColor} 30deg, transparent 110deg)`);
+      setGradient(`linear-gradient(95deg, ${nextColor})`);
+      
+      document.dispatchEvent(
+        new CustomEvent("setGradient", {
+          detail: {
+            previousColor: baseColors[currentIndex],
+            newColor: baseColors[nextIndex], 
+          },
+        })
+      );
+
+      if (nextIndex === baseColors.length - 1) forward = false;
+      if (nextIndex === 0) forward = true;
+
+      currentIndex = nextIndex;
+    }, 500);
+
+    return () => clearInterval(colorInterval);
+  }, []);
+
+  return (
+    <div className="w-[100vw] h-[100vh]">
+      <MouseTrail gradient={gradient} />
+      <Header activeSection={activeSection} gradient={gradient} handleScrollToHome={handleScrollToHome} handleScrollToAbout={handleScrollToAbout} handleScrollToContact={handleScrollToContact}/>
+      <div className="max-h-[81.5vh] w-full overflow-auto scroll-smooth snap-y snap-mandatory">
+
+      <AnimatePresence mode="sync">
+        <motion.div
+          key="home"
+          id="home"
+          ref={homeRef} 
+          className="section h-[81.5vh] flex flex-col justify-between py-3 snap-start"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{
+            opacity: homeSectionVisible ? 1 : 0,
+            y: homeSectionVisible ? 0 : 20, 
+          }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <div className="px-72 justify-start flex">
+            <XShape gradient={gradient} yValue={100} />
+          </div>
+          <div className="flex flex-row px-12 justify-center">
+            <Foto gradient={gradientRotate} fadeOut={fadeOut} handleScrollToAbout={handleScrollToAbout} />
+          </div>
+          <div className="px-72 justify-end flex">
+            <XShape gradient={gradient} yValue={-100} />
+          </div>
+        </motion.div>
+
+        <motion.div
+          key="about"
+          id="about"
+          ref={aboutRef} 
+          className="section h-[81.5vh] flex flex-row items-center justify-start gap-12 px-40 snap-start"
+          initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
+          animate={{
+            opacity: aboutSectionVisible ? 1 : 0, 
+            visibility: aboutSectionVisible ? 'visible' : 'hidden',
+            y: aboutSectionVisible ? 0 : -15,
+          }}
+          exit={{ opacity: 0, visibility: 'hidden', y: -15 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
         >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+          <About gradient={gradient} />
+        </motion.div>
+
+        <motion.div
+          key="contact"
+          id="contact"
+          ref={contactRef} 
+          className="section h-[81.5vh] flex flex-row items-center justify-start gap-12 px-40 snap-start "
+          initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
+          animate={{
+            opacity: contactSectionVisible ? 1 : 0, 
+            visibility: contactSectionVisible ? 'visible' : 'hidden',
+            y: contactSectionVisible ? 0 : -15,
+          }}
+          exit={{ opacity: 0, visibility: 'hidden', y: -15 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
         >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+          <Contact/>
+        </motion.div>
+      </AnimatePresence>
+
+      </div>
+ 
+      <Footer/>
+
+      <Script type="module" src="/etc/app.js" strategy="lazyOnload" />
+      <div id="container3D">
+      </div>
+
     </div>
   );
 }

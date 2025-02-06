@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #ffffff;
+  --background: #171717;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #0a0a0a;
+    --background: #ededed;
   }
 }
 
@@ -18,4 +18,138 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  cursor: url("/mouse/mouse.svg"), auto;
+}
+
+* {
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  //scrollbar-width: thin;
+  scrollbar-color: #A1DFF0 transparent;
+}
+
+#container3D {
+    position: fixed;
+    inset: 0;
+    /* background-color: red; */
+    z-index: 100;
+    pointer-events: none;
+}
+
+.robot-speech {
+  position: absolute;
+  margin-top: -60px;
+  margin-left: 10px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 16px;
+  text-align: center;
+  opacity: 0.8;
+  transform-origin: 20% 0;
+  transition: transform 0.3s ease-in-out;
+  white-space: nowrap; /* Prevents text wrapping */
+  overflow: hidden; /* Hides text overflow */
+}
+
+
+.mouse-trail-dot {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.2s ease-out;
+}
+
+.textAnimation {
+  display: inline-block;
+  letter-spacing: 10px;
+  font-size: 14px;
+  font-family: monospace;
+  border-right: 5px #5e94c9 solid;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  animation:
+    typing 2s steps(15),
+    cursor .4s step-end infinite alternate;
+}
+
+.circle {
+  height: 24px;
+  width: 24px;
+  border-radius: 99px;
+  position: fixed;
+  top: -9999px; /* Initially hide the circle off-screen */
+  left: -9999px; /* Initially hide the circle off-screen */
+  pointer-events: none;
+  z-index: 99999999; /* so that it stays on top of all other elements */
+}
+
+.boxProfile {
+  width: 288px;
+  height: 288px;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.boxProfile::before {
+  content: "";
+  background-image: var(--dynamic-gradient, conic-gradient(red 30deg, transparent 110deg));
+  width: 150%;
+  height: 150%;
+  position: absolute;
+  border-radius: 9999px;
+  animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wave {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+  75% {
+    transform: translateY(10px) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.flying-wave {
+  animation: wave 3s ease-in-out infinite;
+}
+
+.tiltCard{
+  height: 400px;
+  width: 550px;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 0.20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.bgBlack{
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
