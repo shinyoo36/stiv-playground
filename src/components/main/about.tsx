@@ -79,24 +79,30 @@ const About = ({ gradient }: { gradient: string }) => {
             transition={{ duration: 0.4, ease: "easeInOut" }}
         >
             <div className="flex flex-row gap-8">
-                <img src="/skill/tailwind.svg" className="z-10 h-[40px] flying-wave" />
-                <img src="/skill/spring.svg" className="z-10 h-[40px] flying-wave" />
-                <img src="/skill/react.svg" className="z-10 h-[40px] flying-wave" />
+              <div className="flex flex-row gap-8">
+                <SkillIcon src="/skill/tailwind.svg" title="Tailwind" text="Intermediate" />
+                <SkillIcon src="/skill/spring.svg" title="Spring Boot" text="Intermediate"/>
+                <SkillIcon src="/skill/react.svg" title="React" text="Intermediate"/>
+              </div>
+
             </div>
             <div className="flex flex-row gap-8">
-                <img src="/skill/django.svg" className="z-10 h-[40px] flying-wave" />
-                <img src="/skill/postgresql.svg" className="z-10 h-[40px] flying-wave" />
-                <img src="/skill/mui.svg" className="z-10 h-[40px] flying-wave" />
+                <SkillIcon src="/skill/django.svg" title="Django" text="Beginner" />
+                <SkillIcon src="/skill/postgresql.svg" title="Postgresql" text="Intermediate" />
+                <SkillIcon src="/skill/mui.svg" title="MaterialUI" text="Intermediate" />
             </div>
             <div className="flex flex-row gap-8">
-                <img src="/skill/java.svg" className="z-10 h-[40px] flying-wave" />
-                <img src="/skill/js.svg" className="z-10 h-[40px] flying-wave" />
-                <img src="/skill/ts.svg" className="z-10 h-[40px] flying-wave" />
+                <SkillIcon src="/skill/java.svg" title="Java" text="Intermediate" />
+                <SkillIcon src="/skill/js.svg" title="Javascript" text="Intermediate" />
+                <SkillIcon src="/skill/ts.svg" title="Typescript" text="Intermediate" />
             </div>
             <div className="flex flex-row gap-8">
-                <img src="/skill/css.svg" className="z-10 h-[40px] flying-wave" />
-                <img src="/skill/html.svg" className="z-10 h-[40px] flying-wave" />
-                <img src="/skill/node.svg" className="z-10 h-[40px] flying-wave" />
+                <SkillIcon src="/skill/css.svg" title="CSS" text="Intermediate" />
+                <SkillIcon src="/skill/html.svg" title="HTML" text="Intermediate" />
+                <SkillIcon src="/skill/node.svg" title="Node.js" text="Beginner" />
+            </div>
+            <div className="flex flex-row gap-8">
+                <SkillIcon src="/skill/three.svg" title="Three.js" text="Beginner" />
             </div>
         </motion.div>
     )}
@@ -278,3 +284,16 @@ const CertificateSection = ({ gradient } : { gradient: string;}) => {
     </motion.div>
   );
 };
+
+const SkillIcon = ({ title, text, src }: { title: string, text: string; src: string }) => {
+  return (
+    <div className="relative group">
+      <img src={src} className="z-10 h-[40px] flying-wave" alt={text} />
+      <span className="font-teko absolute z-20  bg-neutral-800 flex flex-col items-center justify-center  rounded-md px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+        <p className="text-[18px] tracking-[2px]">{title}</p>
+        <p className="text-[16px] tracking-[2px]">{text}</p>
+      </span>
+    </div>
+  );
+};
+
