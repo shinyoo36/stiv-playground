@@ -75,6 +75,7 @@ export default function Home() {
       setFirstLoad(false);
     }
   }, [loading, firstLoad]);
+
   useEffect(() => {
     if (!loading) {
       const observer = new IntersectionObserver(
@@ -104,108 +105,79 @@ export default function Home() {
   
   
   useEffect(() => {
+  if (!loading) {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setHomeSectionVisible(true); 
-          setActiveSection("home");
-          document.dispatchEvent(
-            new CustomEvent("setSpeechText", {
-              detail: {
-                text: "Welcome!" ,
-                text2: "What Would you like to see?", 
-              },
-            })
-          );
-        } else {
-          
-          setHomeSectionVisible(false);
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          console.log("Observed:", entry.target.id, "Is Visible:", entry.isIntersecting);
+
+          if (entry.isIntersecting) {
+            switch (entry.target.id) {
+              case "home":
+                setActiveSection("home");
+                setHomeSectionVisible(true);
+                document.dispatchEvent(
+                  new CustomEvent("setSpeechText", {
+                    detail: {
+                      text: "Welcome!",
+                      text2: "What Would you like to see?",
+                    },
+                  })
+                );
+                break;
+
+              case "about":
+                setActiveSection("about");
+                setAboutSectionVisible(true);
+                document.dispatchEvent(
+                  new CustomEvent("setSpeechText", {
+                    detail: {
+                      text: "Let's move on to about me section!",
+                      text2: "There are only 6 things here at the moment... 🫠",
+                    },
+                  })
+                );
+                break;
+
+              case "contact":
+                setActiveSection("contact");
+                setContactSectionVisible(true);
+                document.dispatchEvent(
+                  new CustomEvent("setSpeechText", {
+                    detail: {
+                      text: "Let's see how to contact me!",
+                      text2: "I hope we can make great things together! 😀",
+                    },
+                  })
+                );
+                break;
+            }
+          } else {
+            if (entry.target.id === "home") {
+              setHomeSectionVisible(false);
+            } else if (entry.target.id === "about") {
+              setAboutSectionVisible(false);
+            } else if (entry.target.id === "contact") {
+              setContactSectionVisible(false);
+            }
+          }
+        });
       },
-      {
-        threshold: 0.1, 
-      }
+      { threshold: 0.1 }
     );
 
-    if (homeRef.current) {
-      observer.observe(homeRef.current);
-    }
+    if (homeRef.current) observer.observe(homeRef.current);
+    if (aboutRef.current) observer.observe(aboutRef.current);
+    if (contactRef.current) observer.observe(contactRef.current);
 
     return () => {
-      if (homeRef.current) {
-        observer.unobserve(homeRef.current);
-      }
+      if (homeRef.current) observer.unobserve(homeRef.current);
+      if (aboutRef.current) observer.unobserve(aboutRef.current);
+      if (contactRef.current) observer.unobserve(contactRef.current);
     };
-  }, []);
+  }
+}, [loading]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setActiveSection("about");
-          setAboutSectionVisible(true); 
-          document.dispatchEvent(
-            new CustomEvent("setSpeechText", {
-              detail: {
-                text: "Let's move on to about me section!" ,
-                text2: 'There are only 6 things here at the moment... 🫠', 
-              },
-            })
-          );
-        } else {
-          setAboutSectionVisible(false); 
-        }
-      },
-      {
-        threshold: 0.1, 
-      }
-    );
-
-    if (aboutRef.current) {
-      observer.observe(aboutRef.current);
-    }
-
-    return () => {
-      if (aboutRef.current) {
-        observer.unobserve(aboutRef.current);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setActiveSection("contact");
-          setContactSectionVisible(true); 
-          document.dispatchEvent(
-            new CustomEvent("setSpeechText", {
-              detail: {
-                text: "Let's see how to contact me!" ,
-                text2: 'I hope we can make great things together! 😀', 
-              },
-            })
-          );
-        } else {
-          
-          setContactSectionVisible(false);
-        }
-      },
-      {
-        threshold: 0.1, 
-      }
-    );
-
-    if (contactRef.current) {
-      observer.observe(contactRef.current);
-    }
-
-    return () => {
-      if (contactRef.current) {
-        observer.unobserve(contactRef.current);
-      }
-    };
-  }, []);
 
   const handleScrollToHome = () => {
     setFadeOut(true);
