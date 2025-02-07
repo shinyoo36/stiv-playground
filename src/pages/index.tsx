@@ -373,7 +373,7 @@ const LoadingScreen = () => {
       className="flex flex-col items-center justify-center w-full h-full bg-black text-white text-2xl"
     >
       {displayText}
-      {!isMobile && (
+      {isMobile && (
         <div className="w-full absolute bottom-12 left-1/2 transform -translate-x-1/2 text-xl">
           <div className="flex flex-col justify-center items-center">
             <p className="text-bold">It seems you're using a mobile or tablet device</p>
