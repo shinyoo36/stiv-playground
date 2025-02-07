@@ -10,6 +10,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import About from "@/components/main/about";
 import Contact from "@/components/main/contact";
 
+const isMobileDevice = () => {
+  if (typeof navigator !== "undefined" && "userAgentData" in navigator) {
+    return (navigator as any).userAgentData.mobile; // Cast to `any` to avoid TypeScript error
+  }
+  return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
+};
+
+
 export default function Home() {
   const baseColors = [
     "#ff0000", "#fd0071", "#e700b0", "#c03adb", "#8b6de7",
@@ -17,6 +25,7 @@ export default function Home() {
     "#00d562", "#30d128"
   ];
 
+  const [loading, setLoading] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
 
   const [gradientRotate, setGradientRotate] = useState("");
@@ -32,34 +41,68 @@ export default function Home() {
   const contactRef = useRef(null);
 
   useEffect(() => {
-    setTimeout(() => {
-      document.dispatchEvent(
-        new CustomEvent("setSpeechText", {
-          detail: {
-            text: "Welcome!",
-            text2: "What would you like to see?",
-          },
-        })
-      );
-    }, 500);
-
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 3000);
+  
+    return () => clearTimeout(timer);
   }, []);
-
+  
   useEffect(() => {
+    if (!loading && firstLoad) {
+      setTimeout(() => {
+        const isMobile = isMobileDevice();
+        let text;
+        let text2;
+        console.log("isMobile", isMobile);
+        // if (isMobile) {
+        //   text = "Welcome, mobile user!";
+        //   text2 = "Tap to explore!";
+        // } else {
+        //   text = "Welcome, desktop user!";
+        //   text2 = "Use your mouse to navigate!";
+        // }
 
-    if(firstLoad == true){
-      document.dispatchEvent(
-        new CustomEvent("setSpeechText", {
-          detail: {
-            text: "Welcome!" ,
-            text2: "What Would you like to see?", 
-          },
-        })
-      );
+        document.dispatchEvent(
+          new CustomEvent("setSpeechText", {
+            detail: {
+              text: "Welcome!",
+              text2: "What would you like to see?",
+            },
+          })
+        );
+      }, 500);
       setFirstLoad(false);
     }
-  }, []);
-
+  }, [loading, firstLoad]);
+  useEffect(() => {
+    if (!loading) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            console.log("Observed:", entry.target.id, "Is Visible:", entry.isIntersecting);
+  
+            if (entry.target.id === "about") {
+              setAboutSectionVisible(entry.isIntersecting);
+            } else if (entry.target.id === "contact") {
+              setContactSectionVisible(entry.isIntersecting);
+            }
+          });
+        },
+        { threshold: 0.1 }
+      );
+  
+      if (aboutRef.current) observer.observe(aboutRef.current);
+      if (contactRef.current) observer.observe(contactRef.current);
+  
+      return () => {
+        if (aboutRef.current) observer.unobserve(aboutRef.current);
+        if (contactRef.current) observer.unobserve(contactRef.current);
+      };
+    }
+  }, [loading]);
+  
+  
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -105,7 +148,7 @@ export default function Home() {
             new CustomEvent("setSpeechText", {
               detail: {
                 text: "Let's move on to about me section!" ,
-                text2: 'There are only 3 things here at the moment... 🫠', 
+                text2: 'There are only 6 things here at the moment... 🫠', 
               },
             })
           );
@@ -236,6 +279,10 @@ export default function Home() {
 
   return (
     <div className="w-[100vw] h-[100vh]">
+      {loading ? (
+      <LoadingScreen/>
+      ) : (
+      <>
       <MouseTrail gradient={gradient} />
       <Header activeSection={activeSection} gradient={gradient} handleScrollToHome={handleScrollToHome} handleScrollToAbout={handleScrollToAbout} handleScrollToContact={handleScrollToContact}/>
       <div className="max-h-[81.5vh] w-full overflow-auto scroll-smooth snap-y snap-mandatory">
@@ -269,7 +316,7 @@ export default function Home() {
           key="about"
           id="about"
           ref={aboutRef} 
-          className="section h-[81.5vh] flex flex-row items-center justify-start gap-12 px-40 snap-start"
+          className="section h-[81.5vh]  snap-start"
           initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
           animate={{
             opacity: aboutSectionVisible ? 1 : 0, 
@@ -286,7 +333,7 @@ export default function Home() {
           key="contact"
           id="contact"
           ref={contactRef} 
-          className="section h-[81.5vh] flex flex-row items-center justify-start gap-12 px-40 snap-start "
+          className="section h-[81.5vh] flex flex-row items-center justify-start gap-12 px-12 lg:px-40 snap-start "
           initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
           animate={{
             opacity: contactSectionVisible ? 1 : 0, 
@@ -301,13 +348,70 @@ export default function Home() {
       </AnimatePresence>
 
       </div>
- 
-      <Footer/>
 
-      <Script type="module" src="/etc/app.js" strategy="lazyOnload" />
+      <Footer/>
+      </>
+      )}
+
+
+      <Script
+        id="delayed-script"
+        strategy="lazyOnload"
+        dangerouslySetInnerHTML={{
+          __html: `
+            setTimeout(() => {
+              const script = document.createElement('script');
+              script.type = 'module';
+              script.src = '/etc/app.js';
+              document.body.appendChild(script);
+            }, 3000);
+          `,
+        }}
+      />
+
       <div id="container3D">
       </div>
 
     </div>
   );
 }
+
+const LoadingScreen = () => {
+  const text = "Loading...";
+  const [displayText, setDisplayText] = useState("");
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDisplayText((prev) => (index < text.length ? text.slice(0, index + 1) : ""));
+      setIndex((prev) => (prev < text.length ? prev + 1 : 0));
+    }, 200); // Adjust speed of typing here
+
+    return () => clearInterval(interval);
+  }, [index]);
+
+  const isMobile = isMobileDevice();
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="flex flex-col items-center justify-center w-full h-full bg-black text-white text-2xl"
+    >
+      {displayText}
+      {!isMobile && (
+        <div className="w-full absolute bottom-12 left-1/2 transform -translate-x-1/2 text-xl">
+          <div className="flex flex-col justify-center items-center">
+            <p className="text-bold">It seems you're using a mobile or tablet device</p>
+            <p>Please use pc or laptop for full experience!</p>
+          </div>
+        </div>
+      )}
+
+ 
+
+    </motion.div>
+  );
+};

@@ -240,13 +240,13 @@ const updateSpeechBubblePosition = () => {
 let arrPositionModel = [
     {
         id: 'home',
-        position: { x: 0, y: -0.5, z: 0 },
+        position: { x: 0, y: -1.5, z: 0 },
         rotation: { x: 0, y: 0, z: 0 },
     },
     {
         id: 'about',
-        position: { x: 0, y: -1.65, z: 0 },
-        rotation: { x: 0, y: 0, z: 0 },
+        position: { x: -3, y: -0.5, z: 0 },
+        rotation: { x: 0, y: 1, z: 0 },
     },
     {
         id: 'contact',
