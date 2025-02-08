@@ -324,14 +324,22 @@ const Work = ({
               <p className="text-wrap text-[14] font-semibold">Cranium</p>
               <p className="text-wrap text-[12px] font-thin">Full Stack Developer</p>
               <div className="flex flex-row gap-2 pt-1">
-                <div className="bg-slate-800 rounded-lg px-2"><p className=" text-[12px] ">React</p></div>
-                <div className="bg-slate-800 rounded-lg  px-2"><p className=" text-[12px] ">Typescript</p></div>
-                <div className="bg-slate-800 rounded-lg  px-2"><p className=" text-[12px] ">Spring Boot</p></div>
-                <div className="bg-slate-800 rounded-lg  px-2"><p className=" text-[12px] ">Next.js</p></div>
+                <div className="rounded-lg " style={{ background: gradient }}>
+                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">React</p></div>
+                </div>
+                <div className="rounded-lg " style={{ background: gradient }}>
+                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Typescript</p></div>
+                </div>
+                <div className="rounded-lg " style={{ background: gradient }}>
+                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Spring Boot</p></div>
+                </div>
+                <div className="rounded-lg " style={{ background: gradient }}>
+                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Next.js</p></div>
+                </div>
               </div>
             </div>
           </div>
-          <p className="text-wrap text-[13px] ">Jan 2023 - Present</p>
+          <p className="text-wrap text-[12px] md:text-[14px]">Jan 2023 - Present</p>
         </div>
 
 
@@ -345,14 +353,22 @@ const Work = ({
               <p className="text-wrap text-[14px] font-semibold">PT. Multimedia Digital Nusantara</p>
               <p className="text-wrap text-[12px] font-thin">Web Developer Intern</p>
               <div className="flex flex-row gap-2 pt-1">
-                <div className="bg-slate-800 rounded-lg px-2"><p className=" text-[12px] ">Django</p></div>
-                <div className="bg-slate-800 rounded-lg  px-2"><p className=" text-[12px] ">HTML</p></div>
-                <div className="bg-slate-800 rounded-lg  px-2"><p className=" text-[12px] ">Javascript</p></div>
-                <div className="bg-slate-800 rounded-lg  px-2"><p className=" text-[12px] ">Tailwind</p></div>
+                <div className="rounded-lg " style={{ background: gradient }}>
+                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Django</p></div>
+                </div>
+                <div className="rounded-lg " style={{ background: gradient }}>
+                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">HTML</p></div>
+                </div>
+                <div className="rounded-lg " style={{ background: gradient }}>
+                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Javascript</p></div>
+                </div>
+                <div className="rounded-lg " style={{ background: gradient }}>
+                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Tailwind</p></div>
+                </div>
               </div>
             </div>
           </div>
-          <p className="text-wrap text-[13px] ">Aug 2022 - Jan 2023</p>
+          <p className="text-wrap text-[12px] md:text-[14px]">Aug 2022 - Jan 2023</p>
         </div>
 
       </div>
@@ -444,12 +460,12 @@ const ProjectCard = ({
                   />
                 </div>
               </div>
-              <p className="text-[12px] font-thin line-clamp-2">{desc}</p>
+              <p className="text-[12px] md:text-[12px] font-thin line-clamp-2">{desc}</p>
               <div className="flex flex-row gap-2 pt-1">
                 {skill.map((item, index) => (
                   <div key={index} className="rounded-lg" style={{ background: gradient }}>
                     <div className="m-[1px] px-2 bg-slate-800 rounded-lg">
-                      <p className="text-[12px]">{item}</p>
+                      <p className="text-[10px] md:text-[12px]">{item}</p>
                     </div>
                   </div>
                 ))}

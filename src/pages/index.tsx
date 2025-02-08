@@ -18,7 +18,7 @@ export default function Home() {
     "#00d562", "#30d128"
   ];
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [firstLoad, setFirstLoad] = useState(true);
 
   const [gradientRotate, setGradientRotate] = useState("");
@@ -232,80 +232,82 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="w-[100vw] h-[100vh]">
+    
+    <div className="flex flex-col justify-between min-h-screen max-w-[1080px] px-2 md:px-8 mx-auto">
       {loading ? (
       <LoadingScreen/>
       ) : (
-      <>
-      <MouseTrail gradient={gradient} />
-      <Header activeSection={activeSection} gradient={gradient} handleScrollToHome={handleScrollToHome} handleScrollToAbout={handleScrollToAbout} handleScrollToContact={handleScrollToContact}/>
-      <div className="max-h-[81.5vh] w-full overflow-auto scroll-smooth snap-y snap-mandatory">
+        <>
+        <Header 
+          activeSection={activeSection} 
+          gradient={gradient} 
+          handleScrollToHome={handleScrollToHome} 
+          handleScrollToAbout={handleScrollToAbout} 
+          handleScrollToContact={handleScrollToContact}
+        />
+        <div className="h-[80vh] overflow-auto scroll-smooth snap-y snap-mandatory">
+          <AnimatePresence mode="sync">
+            <motion.div
+              key="home"
+              id="home"
+              ref={homeRef} 
+              className="section h-[80vh]  w-full justify-center items-center flex snap-start relative" 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{
+                opacity: homeSectionVisible ? 1 : 0,
+                y: homeSectionVisible ? 0 : 20, 
+              }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              <div className="absolute top-10 left-5">
+                <XShape gradient={gradient} yValue={100} />
+              </div>
+              <Foto gradient={gradientRotate} fadeOut={fadeOut} handleScrollToAbout={handleScrollToAbout} />
+              <div className="absolute bottom-10 right-[-32px]">
+                <XShape gradient={gradient} yValue={-100} />
+              </div>
+            </motion.div>
 
-      <AnimatePresence mode="sync">
-        <motion.div
-          key="home"
-          id="home"
-          ref={homeRef} 
-          className="section h-[81.5vh] flex flex-col justify-between py-3 snap-start"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{
-            opacity: homeSectionVisible ? 1 : 0,
-            y: homeSectionVisible ? 0 : 20, 
-          }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-        >
-          <div className="px-72 justify-start flex">
-            <XShape gradient={gradient} yValue={100} />
-          </div>
-          <div className="flex flex-row px-12 justify-center">
-            <Foto gradient={gradientRotate} fadeOut={fadeOut} handleScrollToAbout={handleScrollToAbout} />
-          </div>
-          <div className="px-72 justify-end flex">
-            <XShape gradient={gradient} yValue={-100} />
-          </div>
-        </motion.div>
+            <motion.div
+              key="about"
+              id="about"
+              ref={aboutRef} 
+              className="section h-[80vh] w-full snap-start"
+              initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
+              animate={{
+                opacity: aboutSectionVisible ? 1 : 0, 
+                visibility: aboutSectionVisible ? 'visible' : 'hidden',
+                y: aboutSectionVisible ? 0 : -15,
+              }}
+              exit={{ opacity: 0, visibility: 'hidden', y: -15 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              <About gradient={gradient} />
+            </motion.div>
 
-        <motion.div
-          key="about"
-          id="about"
-          ref={aboutRef} 
-          className="section h-[81.5vh]  snap-start"
-          initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
-          animate={{
-            opacity: aboutSectionVisible ? 1 : 0, 
-            visibility: aboutSectionVisible ? 'visible' : 'hidden',
-            y: aboutSectionVisible ? 0 : -15,
-          }}
-          exit={{ opacity: 0, visibility: 'hidden', y: -15 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-        >
-          <About gradient={gradient} />
-        </motion.div>
-
-        <motion.div
-          key="contact"
-          id="contact"
-          ref={contactRef} 
-          className="section h-[81.5vh] w-full snap-start "
-          initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
-          animate={{
-            opacity: contactSectionVisible ? 1 : 0, 
-            visibility: contactSectionVisible ? 'visible' : 'hidden',
-            y: contactSectionVisible ? 0 : -15,
-          }}
-          exit={{ opacity: 0, visibility: 'hidden', y: -15 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
-        >
-          <Contact/>
-        </motion.div>
-      </AnimatePresence>
-
-      </div>
-
-      <Footer/>
-      </>
+            <motion.div
+              key="contact"
+              id="contact"
+              ref={contactRef} 
+              className="section h-[80vh] w-full snap-start"
+              initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
+              animate={{
+                opacity: contactSectionVisible ? 1 : 0, 
+                visibility: contactSectionVisible ? 'visible' : 'hidden',
+                y: contactSectionVisible ? 0 : -15,
+              }}
+              exit={{ opacity: 0, visibility: 'hidden', y: -15 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              <Contact/>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+        <Footer/>
+        </>
       )}
+      <MouseTrail gradient={gradient} />
 
 
       <Script
@@ -324,22 +326,43 @@ export default function Home() {
       />
 
       <div id="container3D">
-      </div>
-
+      </div> 
     </div>
+
+    
+
   );
+  
 }
 
 const LoadingScreen = () => {
   const text = "Loading...";
   const [displayText, setDisplayText] = useState("");
   const [index, setIndex] = useState(0);
+  const [deviceType, setDeviceType] = useState<"mobile" | "tablet" | "desktop">("desktop");
+
+  // Function to detect device type
+  const detectDevice = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    if (/mobile|android|iphone|ipod|blackberry|windows phone/i.test(userAgent)) {
+      setDeviceType("mobile");
+    } else if (/ipad|tablet|kindle|playbook/i.test(userAgent) || (navigator.maxTouchPoints > 1 && window.innerWidth <= 1024)) {
+      setDeviceType("tablet");
+    } else {
+      setDeviceType("desktop");
+    }
+  };
+
+  useEffect(() => {
+    detectDevice();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setDisplayText((prev) => (index < text.length ? text.slice(0, index + 1) : ""));
       setIndex((prev) => (prev < text.length ? prev + 1 : 0));
-    }, 200); 
+    }, 200);
 
     return () => clearInterval(interval);
   }, [index]);
@@ -350,15 +373,21 @@ const LoadingScreen = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex flex-col items-center justify-center w-full h-full bg-black text-white text-2xl"
+      className="h-[100vh] flex items-center justify-center text-white text-2xl"
     >
-      {displayText}
+      <div>
+        <p>{displayText}</p>
+      </div>
+
+      {/* Show mobile/tablet warning if detected */}
+      {(deviceType === "mobile" || deviceType === "tablet") && (
         <div className="w-full absolute bottom-12 left-1/2 transform -translate-x-1/2 text-xl">
           <div className="flex flex-col justify-center items-center">
-            <p className="text-bold">It seems you're using a mobile or tablet device</p>
-            <p>Please use pc or laptop for full experience!</p>
+            <p className="font-bold">It seems you're using a {deviceType} device</p>
+            <p className="text-[16px]">Please use a PC or laptop for the full experience!</p>
           </div>
         </div>
+      )}
     </motion.div>
   );
 };

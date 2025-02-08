@@ -11,17 +11,16 @@ interface FotoProps {
 const Header = ({gradient, activeSection, handleScrollToHome, handleScrollToAbout, handleScrollToContact }: FotoProps) => {
 
   return (
-    <div className="flex flex-row justify-between py-3 px-2 lg:px-36 h-[10vh]">
+    <div className="flex flex-row justify-between h-[10vh] w-full">
         <div className="flex flex-row justify-center items-center">
-            <Image
+            <img
                 src="/logo.svg"
                 alt="logo"
-                width={50}
-                height={50}
+                className="h-[50px]"
             />
-            <p>Stiv's Playgrounds</p>
+            <p className="font-teko tracking-[2px] text-[0px] sm:text-[18px]">Stiv's Playgrounds</p>
         </div>
-        <ul className="flex flex-row gap-3 lg:gap-16 items-center">
+        <ul className="flex flex-row gap-4 sm:gap-8 md:gap-12 lg:gap-16 items-center">
             <Text 
                 activeSection={activeSection} 
                 section="home" 
@@ -71,7 +70,7 @@ const Text: React.FC<TextProps> = ({ activeSection, section, text, gradient, han
             style={activeSection === section ? { background: gradient } : {}}
         >
         <li 
-            className=" p-1 rounded-lg bg-[#171717] cursor-customPointer"
+            className="text-[12px]  sm:text-[16px] p-1 rounded-lg bg-[#171717] cursor-customPointer"
             onClick={handleClick} 
         >
             {text}

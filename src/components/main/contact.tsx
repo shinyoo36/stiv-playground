@@ -21,7 +21,7 @@ const Contact = () => {
 
 
     return (
-    <div className="flex flex-col px-12 lg:px-36 justify-evenly items-center w-full h-full">
+    <div className="flex flex-col items-center justify-center gap-12 h-full">
         <p className="font-teko font-[400] tracking-[2px] text-[24px] lg:text-[30px]">Contact</p>
         <div className="flex flex-col gap-3">
         {contactInfo.map((social, index) => (
