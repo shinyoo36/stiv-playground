@@ -21,11 +21,11 @@ const Contact = () => {
 
 
     return (
-    <div className="flex flex-col gap-6 py-3 px-12 lg:px-36 justify-between items-center w-full">
+    <div className="flex flex-col px-12 lg:px-36 justify-evenly items-center w-full h-full">
         <p className="font-teko font-[400] tracking-[2px] text-[24px] lg:text-[30px]">Contact</p>
-        <div className="flex flex-col gap-4 p-3">
+        <div className="flex flex-col gap-3">
         {contactInfo.map((social, index) => (
-          <div key={index} className="flex flex-row items-center gap-3">
+          <div key={index} className="flex flex-row items-center justify-start gap-3">
             <Image
               key={index}
               src={social.icon}
@@ -39,7 +39,7 @@ const Contact = () => {
           </div>
         ))}
         </div>
-        <p className="font-teko font-[400] tracking-[1px] text-[24px] lg:text-[30px] text-justify">
+        <p className="lg:max-w-[624px] font-teko font-[400] tracking-[1px] text-[20px] lg:text-[30px] text-justify">
           For business inquiries, freelance or any opportunities you can contact me at stiven.riandy@gmail.com or through personal message on my LinkedIn below.
           I can also work remotely!
         </p>
