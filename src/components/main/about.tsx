@@ -310,69 +310,70 @@ const Work = ({
     <div
       data-tilt
       data-tilt-glare
-      className="p-[3px] rounded-lg flex items-center w-full mx-3" 
+      className="p-[3px] rounded-lg flex items-center" 
       style={{ background: gradient }}
     >
-      <div className="h-full p-2 space-y-3 bg-neutral-700 rounded-lg  w-full">
-
-        <div className="flex flex-row justify-between items-center ">
-          <div className="flex flex-row gap-3 w-full ">
-            <div className="flex flex-col justify-end items-center">
+      <div className="h-full p-3 bg-neutral-700 rounded-lg w-full relative flex flex-row gap-2">
+        <div className="flex pt-[26px]">
+          <div className="flex flex-col items-center">
               <div className="w-[15px] h-[15px] rounded-full" style={{ background: gradient }}></div>
-              <div className="w-[3px] h-[40px] rotate-60 mt-[-1px] mb-[-13px]" style={{ background: gradient }}></div>
-            </div>
-            <div className="flex flex-col w-full">
-              <p className="text-wrap text-[14] font-semibold">Cranium</p>
-              <p className="text-wrap text-[12px] font-thin">Full Stack Developer</p>
-              <div className="flex flex-row gap-1 md:gap-2 pt-1 w-full">
-                <div className="rounded-lg " style={{ background: gradient }}>
-                  <div className="bg-slate-800 rounded-lg m-[1px] px-2 "><p className="text-[10px] md:text-[12px]">React</p></div>
-                </div>
-                <div className="rounded-lg " style={{ background: gradient }}>
-                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Typescript</p></div>
-                </div>
-                <div className="rounded-lg " style={{ background: gradient }}>
-                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Spring Boot</p></div>
-                </div>
-                <div className="rounded-lg " style={{ background: gradient }}>
-                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Next.js</p></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <p className="min-w-[120px] text-[12px] md:text-[14px] flex justify-end">Jan 2023 - Present</p>
-        </div>
-
-
-        <div className="flex flex-row justify-between items-center">
-          <div className="flex flex-row gap-3  w-full">
-            <div className="flex flex-col justify-center items-center">
-              <div className="w-[3px] h-[28px] rotate-60 mt-[-25px]" style={{ background: gradient }}></div>
+              <div className="w-[3px] h-[92px] sm:h-[67px] rotate-60 " style={{ background: gradient }}></div>
               <div className="w-[15px] h-[15px] rounded-full" style={{ background: gradient }}></div>
             </div>
-            <div className="flex flex-col  w-full">
-              <p className="text-wrap text-[14px] font-semibold">PT. Multimedia Digital Nusantara</p>
-              <p className="text-wrap text-[12px] font-thin">Web Developer Intern</p>
-              <div className="flex flex-row gap-1 md:gap-2 pt-1">
-                <div className="rounded-lg " style={{ background: gradient }}>
-                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Django</p></div>
-                </div>
-                <div className="rounded-lg " style={{ background: gradient }}>
-                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">HTML</p></div>
-                </div>
-                <div className="rounded-lg " style={{ background: gradient }}>
-                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Javascript</p></div>
-                </div>
-                <div className="rounded-lg " style={{ background: gradient }}>
-                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Tailwind</p></div>
-                </div>
-              </div>
-            </div>
           </div>
-          <p className="min-w-[120px] text-[12px] md:text-[14px] flex justify-end">Aug 2022 - Jan 2023</p>
+        <div className="flex flex-col gap-3">
+          <WorkCard 
+            company="Cranium"
+            job="Full Stack Developer"
+            year="Jan 2023 - Present"
+            skills={["React", "TypeScript", "Spring Boot", "Next.js"]}
+            gradient={gradient}
+          />
+        <WorkCard 
+            company="PT. Multimedia Digital Nusantara"
+            job="Web Developer Intern"
+            year="Aug 2022 - Jan 2023"
+            skills={["Django", "HTML", "Javascript", "Tailwind"]}
+            gradient={gradient}
+          />
         </div>
+       
+
 
       </div>
+    </div>
+  );
+};
+
+const WorkCard = ({ company, job, year, skills, gradient }: { 
+  company: string; 
+  job: string; 
+  year: string; 
+  skills: string[]; 
+  gradient: string; 
+}) => {
+  return (
+    <div className="flex flex-row justify-between items-center gap-4">
+      <div className="flex flex-row w-full">
+        {/* <div className="flex flex-col justify-end items-center">
+          <div className="w-[15px] h-[15px] rounded-full" style={{ background: gradient }}></div>
+          <div className="w-[3px] h-[45px] rotate-60 mt-[-1px] mb-[-13px]" style={{ background: gradient }}></div>
+        </div> */}
+        <div className="flex flex-col w-full ">
+          <p className="text-wrap text-[16px] font-semibold">{company}</p>
+          <p className="text-wrap text-[14px] font-normal">{job}</p>
+          <div className="grid grid-cols-2 sm:grid-cols-5 gap-1 md:gap-2 pt-1 ">
+            {skills.map((skill, index) => (
+              <div key={index} className="rounded-lg max-w-[75px] sm:max-w-[120px]" style={{ background: gradient }}>
+                <div className="bg-slate-800 rounded-lg m-[1px] px-2">
+                  <p className="text-[10px] sm:text-[12px] text-start">{skill}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <p className="min-w-[130px] text-[14px] flex justify-end">{year}</p>
     </div>
   );
 };

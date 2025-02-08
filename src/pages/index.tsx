@@ -63,7 +63,6 @@ export default function Home() {
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            console.log("Observed:", entry.target.id, "Is Visible:", entry.isIntersecting);
   
             if (entry.target.id === "about") {
               setAboutSectionVisible(entry.isIntersecting);
@@ -91,7 +90,6 @@ export default function Home() {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          console.log("Observed:", entry.target.id, "Is Visible:", entry.isIntersecting);
 
           if (entry.isIntersecting) {
             switch (entry.target.id) {
