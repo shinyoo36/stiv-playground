@@ -21,7 +21,7 @@ const Footer = () => {
 
 
     return (
-    <div className="flex flex-row space-x-4 py-3 px-4 lg:px-36 justify-between items-center h-[10vh] ">
+    <div className="flex flex-row space-x-4 py-3 px-4 lg:px-36 justify-between items-center h-[10vh] w-full">
         <p className="font-teko font-[400] max-w-[200px] sm:max-w-[400px] line-clamp-2 tracking-[2px] text-[18px] md:text-[18px]">For full experience please use PC or Laptop !</p>
         <div className="flex flex-row gap-4">
         {socialMedia.map((social, index) => (

@@ -237,7 +237,7 @@ export default function Home() {
       {loading ? (
       <LoadingScreen/>
       ) : (
-        <div className="flex flex-col justify-between min-h-screen max-w-[1080px] px-2 md:px-8 mx-auto">
+        <div className="flex flex-col justify-between min-h-screen max-w-[1080px] w-full px-2 md:px-8 mx-auto">
           <Header 
             activeSection={activeSection} 
             gradient={gradient} 
@@ -245,7 +245,7 @@ export default function Home() {
             handleScrollToAbout={handleScrollToAbout} 
             handleScrollToContact={handleScrollToContact}
           />
-          <div className="h-[80vh] overflow-auto scroll-smooth snap-y snap-mandatory">
+          <div className="h-[80vh] w-full overflow-y-auto overflow-x-hidden scroll-smooth snap-y snap-mandatory">
             <AnimatePresence mode="sync">
               <motion.div
                 key="home"
@@ -379,7 +379,6 @@ const LoadingScreen = () => {
         <p>{displayText}</p>
       </div>
 
-      {/* Show mobile/tablet warning if detected */}
       {(deviceType === "mobile" || deviceType === "tablet") && (
         <div className="w-full absolute bottom-12 left-1/2 transform -translate-x-1/2 text-xl">
           <div className="flex flex-col justify-center items-center">

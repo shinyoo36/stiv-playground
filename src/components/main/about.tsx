@@ -313,19 +313,19 @@ const Work = ({
       className="p-[3px] rounded-lg flex items-center justify-center"
       style={{ background: gradient }}
     >
-      <div className=" h-full p-2 space-y-3 bg-neutral-700 rounded-lg ">
+      <div className="h-full p-2 space-y-3 bg-neutral-700 rounded-lg ">
         <div className="flex flex-row justify-between items-center ">
-          <div className="flex flex-row gap-3 ">
+          <div className="flex flex-row gap-3 w-full">
             <div className="flex flex-col justify-end items-center">
               <div className="w-[15px] h-[15px] rounded-full" style={{ background: gradient }}></div>
               <div className="w-[3px] h-[40px] rotate-60 mt-[-1px] mb-[-13px]" style={{ background: gradient }}></div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col w-full">
               <p className="text-wrap text-[14] font-semibold">Cranium</p>
               <p className="text-wrap text-[12px] font-thin">Full Stack Developer</p>
-              <div className="flex flex-row gap-2 pt-1">
+              <div className="flex flex-row gap-1 md:gap-2 pt-1">
                 <div className="rounded-lg " style={{ background: gradient }}>
-                  <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">React</p></div>
+                  <div className="bg-slate-800 rounded-lg m-[1px] px-2 "><p className="text-[10px] md:text-[12px]">React</p></div>
                 </div>
                 <div className="rounded-lg " style={{ background: gradient }}>
                   <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Typescript</p></div>
@@ -339,20 +339,21 @@ const Work = ({
               </div>
             </div>
           </div>
-          <p className="text-wrap text-[12px] md:text-[14px]">Jan 2023 - Present</p>
+          <p className="text-wrap text-[12px] md:text-[14px]">Aug 2022 - Jan 2023</p>
+
         </div>
 
 
         <div className="flex flex-row justify-between items-center ">
-          <div className="flex flex-row gap-3">
+          <div className="flex flex-row gap-3  w-full">
             <div className="flex flex-col justify-center items-center">
               <div className="w-[3px] h-[28px] rotate-60 mt-[-25px]" style={{ background: gradient }}></div>
               <div className="w-[15px] h-[15px] rounded-full" style={{ background: gradient }}></div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col  w-full">
               <p className="text-wrap text-[14px] font-semibold">PT. Multimedia Digital Nusantara</p>
               <p className="text-wrap text-[12px] font-thin">Web Developer Intern</p>
-              <div className="flex flex-row gap-2 pt-1">
+              <div className="flex flex-row gap-1 md:gap-2 pt-1">
                 <div className="rounded-lg " style={{ background: gradient }}>
                   <div className="bg-slate-800 rounded-lg m-[1px] px-2"><p className="text-[10px] md:text-[12px]">Django</p></div>
                 </div>
