@@ -233,79 +233,79 @@ export default function Home() {
 
   return (
     
-    <div className="flex flex-col justify-between min-h-screen max-w-[1080px] px-2 md:px-8 mx-auto">
+    <>
       {loading ? (
       <LoadingScreen/>
       ) : (
-        <>
-        <Header 
-          activeSection={activeSection} 
-          gradient={gradient} 
-          handleScrollToHome={handleScrollToHome} 
-          handleScrollToAbout={handleScrollToAbout} 
-          handleScrollToContact={handleScrollToContact}
-        />
-        <div className="h-[80vh] overflow-auto scroll-smooth snap-y snap-mandatory">
-          <AnimatePresence mode="sync">
-            <motion.div
-              key="home"
-              id="home"
-              ref={homeRef} 
-              className="section h-[80vh]  w-full justify-center items-center flex snap-start relative" 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{
-                opacity: homeSectionVisible ? 1 : 0,
-                y: homeSectionVisible ? 0 : 20, 
-              }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-              <div className="absolute top-10 left-5">
-                <XShape gradient={gradient} yValue={100} />
-              </div>
-              <Foto gradient={gradientRotate} fadeOut={fadeOut} handleScrollToAbout={handleScrollToAbout} />
-              <div className="absolute bottom-10 right-[-32px]">
-                <XShape gradient={gradient} yValue={-100} />
-              </div>
-            </motion.div>
+        <div className="flex flex-col justify-between min-h-screen max-w-[1080px] px-2 md:px-8 mx-auto">
+          <Header 
+            activeSection={activeSection} 
+            gradient={gradient} 
+            handleScrollToHome={handleScrollToHome} 
+            handleScrollToAbout={handleScrollToAbout} 
+            handleScrollToContact={handleScrollToContact}
+          />
+          <div className="h-[80vh] overflow-auto scroll-smooth snap-y snap-mandatory">
+            <AnimatePresence mode="sync">
+              <motion.div
+                key="home"
+                id="home"
+                ref={homeRef} 
+                className="section h-[80vh]  w-full justify-center items-center flex snap-start relative" 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{
+                  opacity: homeSectionVisible ? 1 : 0,
+                  y: homeSectionVisible ? 0 : 20, 
+                }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <div className="absolute top-10 left-5">
+                  <XShape gradient={gradient} yValue={100} />
+                </div>
+                <Foto gradient={gradientRotate} fadeOut={fadeOut} handleScrollToAbout={handleScrollToAbout} />
+                <div className="absolute bottom-10 right-[-32px]">
+                  <XShape gradient={gradient} yValue={-100} />
+                </div>
+              </motion.div>
 
-            <motion.div
-              key="about"
-              id="about"
-              ref={aboutRef} 
-              className="section h-[80vh] w-full snap-start"
-              initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
-              animate={{
-                opacity: aboutSectionVisible ? 1 : 0, 
-                visibility: aboutSectionVisible ? 'visible' : 'hidden',
-                y: aboutSectionVisible ? 0 : -15,
-              }}
-              exit={{ opacity: 0, visibility: 'hidden', y: -15 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-              <About gradient={gradient} />
-            </motion.div>
+              <motion.div
+                key="about"
+                id="about"
+                ref={aboutRef} 
+                className="section h-[80vh] w-full snap-start"
+                initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
+                animate={{
+                  opacity: aboutSectionVisible ? 1 : 0, 
+                  visibility: aboutSectionVisible ? 'visible' : 'hidden',
+                  y: aboutSectionVisible ? 0 : -15,
+                }}
+                exit={{ opacity: 0, visibility: 'hidden', y: -15 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <About gradient={gradient} />
+              </motion.div>
 
-            <motion.div
-              key="contact"
-              id="contact"
-              ref={contactRef} 
-              className="section h-[80vh] w-full snap-start"
-              initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
-              animate={{
-                opacity: contactSectionVisible ? 1 : 0, 
-                visibility: contactSectionVisible ? 'visible' : 'hidden',
-                y: contactSectionVisible ? 0 : -15,
-              }}
-              exit={{ opacity: 0, visibility: 'hidden', y: -15 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-              <Contact/>
-            </motion.div>
-          </AnimatePresence>
+              <motion.div
+                key="contact"
+                id="contact"
+                ref={contactRef} 
+                className="section h-[80vh] w-full snap-start"
+                initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
+                animate={{
+                  opacity: contactSectionVisible ? 1 : 0, 
+                  visibility: contactSectionVisible ? 'visible' : 'hidden',
+                  y: contactSectionVisible ? 0 : -15,
+                }}
+                exit={{ opacity: 0, visibility: 'hidden', y: -15 }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              >
+                <Contact/>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+          <Footer/>
         </div>
-        <Footer/>
-        </>
       )}
       <MouseTrail gradient={gradient} />
 
@@ -327,7 +327,7 @@ export default function Home() {
 
       <div id="container3D">
       </div> 
-    </div>
+    </>
 
     
 
@@ -373,7 +373,7 @@ const LoadingScreen = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
-      className="h-[100vh] flex items-center justify-center text-white text-2xl"
+      className="h-[100vh] w-full flex items-center justify-center text-white text-2xl"
     >
       <div>
         <p>{displayText}</p>
@@ -383,8 +383,7 @@ const LoadingScreen = () => {
       {(deviceType === "mobile" || deviceType === "tablet") && (
         <div className="w-full absolute bottom-12 left-1/2 transform -translate-x-1/2 text-xl">
           <div className="flex flex-col justify-center items-center">
-            <p className="font-bold">It seems you're using a {deviceType} device</p>
-            <p className="text-[16px]">Please use a PC or laptop for the full experience!</p>
+            <p className="text-bold max-w-[350px] text-justify">It seems you're using a mobile or tablet device. Please use pc or laptop for full experience!</p>
           </div>
         </div>
       )}

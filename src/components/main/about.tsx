@@ -74,7 +74,7 @@ const About = ({ gradient }: { gradient: string }) => {
             </div>
           </div>
           <div className="flex p-[2px] rounded-sm max-w-[475px] lg:max-w-[600px]"  style={{ background: gradient }}>
-            <p className="text-justify p-3  rounded-sm  bg-neutral-800">
+            <p className="text-justify p-3 text-[14px] md:text-[16px] rounded-sm  bg-neutral-800">
                   I am a Full Stack Developer with 2 years+ of experience, I have developed web apps using React, Next.js, PostgreSQL, Tailwind, MaterialUI, and Spring,
                   with proficient knowledge of Lifecycle Hooks, State Management, Components, Composables, TDD, REST, etc.
                   I prefer the frontend field over backend, but I am capable of working on both.
