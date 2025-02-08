@@ -10,13 +10,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import About from "@/components/main/about";
 import Contact from "@/components/main/contact";
 
-const isMobileDevice = () => {
-  if (typeof navigator !== "undefined" && "userAgentData" in navigator) {
-    return (navigator as any).userAgentData.mobile; // Cast to `any` to avoid TypeScript error
-  }
-  return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Opera Mini|IEMobile|WPDesktop/i.test(navigator.userAgent);
-};
-
 
 export default function Home() {
   const baseColors = [
@@ -25,7 +18,7 @@ export default function Home() {
     "#00d562", "#30d128"
   ];
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [firstLoad, setFirstLoad] = useState(true);
 
   const [gradientRotate, setGradientRotate] = useState("");
@@ -51,17 +44,6 @@ export default function Home() {
   useEffect(() => {
     if (!loading && firstLoad) {
       setTimeout(() => {
-        const isMobile = isMobileDevice();
-        let text;
-        let text2;
-        console.log("isMobile", isMobile);
-        // if (isMobile) {
-        //   text = "Welcome, mobile user!";
-        //   text2 = "Tap to explore!";
-        // } else {
-        //   text = "Welcome, desktop user!";
-        //   text2 = "Use your mouse to navigate!";
-        // }
 
         document.dispatchEvent(
           new CustomEvent("setSpeechText", {
@@ -305,7 +287,7 @@ export default function Home() {
           key="contact"
           id="contact"
           ref={contactRef} 
-          className="section h-[81.5vh] flex flex-row items-center justify-start gap-12 px-12 lg:px-40 snap-start "
+          className="section h-[81.5vh] w-full snap-start "
           initial={{ opacity: 0, visibility: 'hidden', y: 15 }}
           animate={{
             opacity: contactSectionVisible ? 1 : 0, 
@@ -357,12 +339,10 @@ const LoadingScreen = () => {
     const interval = setInterval(() => {
       setDisplayText((prev) => (index < text.length ? text.slice(0, index + 1) : ""));
       setIndex((prev) => (prev < text.length ? prev + 1 : 0));
-    }, 200); // Adjust speed of typing here
+    }, 200); 
 
     return () => clearInterval(interval);
   }, [index]);
-
-  const isMobile = isMobileDevice();
 
   return (
     <motion.div
@@ -373,17 +353,12 @@ const LoadingScreen = () => {
       className="flex flex-col items-center justify-center w-full h-full bg-black text-white text-2xl"
     >
       {displayText}
-      {isMobile && (
         <div className="w-full absolute bottom-12 left-1/2 transform -translate-x-1/2 text-xl">
           <div className="flex flex-col justify-center items-center">
             <p className="text-bold">It seems you're using a mobile or tablet device</p>
             <p>Please use pc or laptop for full experience!</p>
           </div>
         </div>
-      )}
-
- 
-
     </motion.div>
   );
 };
