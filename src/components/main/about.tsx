@@ -49,7 +49,7 @@ const About = ({ gradient }: { gradient: string }) => {
         <CustomCard text="Certificates" gradient={gradient} onClick={() => handleCardClick("certificates")} isActive={activeSection === "certificates"}/>
         <CustomCard text="Work Experiences" gradient={gradient} onClick={() => handleCardClick("work")} isActive={activeSection === "work"}/>
         <CustomCard text="Project" gradient={gradient} onClick={() => handleCardClick("project")} isActive={activeSection === "project"}/>
-        <CustomCard text="Resume" gradient={gradient} onClick={() => window.open("https://drive.google.com/file/d/1g5ke9IFZGh2DrSVIc69krstP0-0Nb7sl/view?usp=sharing", "_blank")} isActive={activeSection === "resume"}/>
+        <CustomCard text="Resume" gradient={gradient} onClick={() => window.open("https://drive.google.com/file/d/17itOc_dZEdVZLyUqwHNHkSUG4Z43MQiw/view?usp=sharing", "_blank")} isActive={activeSection === "resume"}/>
     </div>
 
     <AnimatePresence mode="wait">
