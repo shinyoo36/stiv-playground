@@ -5,7 +5,7 @@ const Footer = () => {
         {
           id: "social-media-4",
           icon: "/sosmed/linkedin.svg",
-          link: "https://www.linkedin.com/in/stiven-065047261/",
+          link: "https://www.linkedin.com/in/stivenang/",
         },
         {
           id: "social-media-1",
