@@ -33,6 +33,25 @@ export default function Home() {
   const aboutRef = useRef(null);
   const contactRef = useRef(null);
 
+  const [deviceType, setDeviceType] = useState<"mobile" | "tablet" | "desktop">("desktop");
+
+  // Function to detect device type
+  const detectDevice = () => {
+    const userAgent = navigator.userAgent.toLowerCase();
+
+    if (/mobile|android|iphone|ipod|blackberry|windows phone/i.test(userAgent)) {
+      setDeviceType("mobile");
+    } else if (/ipad|tablet|kindle|playbook/i.test(userAgent) || (navigator.maxTouchPoints > 1 && window.innerWidth <= 1024)) {
+      setDeviceType("tablet");
+    } else {
+      setDeviceType("desktop");
+    }
+  };
+
+  useEffect(() => {
+    detectDevice();
+  }, []);
+
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -308,29 +327,27 @@ export default function Home() {
       <MouseTrail gradient={gradient} />
 
 
-      <Script
-        id="delayed-script"
-        strategy="lazyOnload"
-        dangerouslySetInnerHTML={{
-          __html: `
-            setTimeout(() => {
-              const script = document.createElement('script');
-              script.type = 'module';
-              script.src = '/etc/app.js';
-              document.body.appendChild(script);
-            }, 3000);
-          `,
-        }}
-      />
+      {deviceType !== "mobile" && deviceType !== "tablet" && (
+        <Script
+          id="delayed-script"
+          strategy="lazyOnload"
+          dangerouslySetInnerHTML={{
+            __html: `
+              setTimeout(() => {
+                const script = document.createElement('script');
+                script.type = 'module';
+                script.src = '/etc/app.js';
+                document.body.appendChild(script);
+              }, 3000);
+            `,
+          }}
+        />
+      )}
 
       <div id="container3D">
       </div> 
     </>
-
-    
-
   );
-  
 }
 
 const LoadingScreen = () => {

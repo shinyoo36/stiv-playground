@@ -57,7 +57,7 @@ const About = ({ gradient }: { gradient: string }) => {
     {activeSection === "shortDesc" && (
         <motion.div
             key="shortDesc"
-            className="max-w-[600px]  space-y-4 py-2"
+            className="max-w-[600px]  space-y-3 md:space-y-12 justify-center flex flex-col h-full md:min-h-[500px] py-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -70,11 +70,11 @@ const About = ({ gradient }: { gradient: string }) => {
             <div>
             <h1 className="text-3xl font-bold">Stiven</h1>
               <p className="text-lg font-bold">Full Stack Developer</p>
-              <p className="text-base">Multimedia Nusantara University</p>
+              <p className="text-base opacity-70">Multimedia Nusantara University</p>
             </div>
           </div>
-          <div className="flex p-[2px] rounded-sm max-w-[475px] lg:max-w-[600px]"  style={{ background: gradient }}>
-            <p className="text-justify p-3 text-[14px] md:text-[16px] rounded-sm  bg-neutral-800">
+          <div className="flex rounded-sm max-w-[475px] lg:max-w-[600px]"  style={{ background: gradient }}>
+            <p className="text-justify m-[2px] py-2 px-[10px] text-[13px] md:text-[14px] rounded-sm  bg-neutral-800">
                   I am a Full Stack Developer with 2 years+ of experience, I have developed web apps using React, Next.js, PostgreSQL, Tailwind, MaterialUI, and Spring,
                   with proficient knowledge of Lifecycle Hooks, State Management, Components, Composables, TDD, REST, etc.
                   I prefer the frontend field over backend, but I am capable of working on both.
@@ -169,14 +169,14 @@ const CustomCard: React.FC<CustomCard> = ({ text, gradient, onClick, isActive })
         >
         <div className="bg-neutral-700  w-full m-[2px] py-1 pl-2 pr-10  cursor-customPointer rounded-xl relative " >
             <div className="flex justify-center items-center h-full">
-              <p className="text-[14px] w-full">{text}</p>
+              <p className="text-[13px] w-full">{text}</p>
             </div>
             <div
-                className="absolute w-[3px] h-[15px] rounded-lg -rotate-[43.5deg] right-[20px] top-[25%]"
+                className="absolute w-[2px] h-[10px] rounded-lg -rotate-[50deg] right-[20px] top-[33%]"
                 style={{ background: gradient }}
             />
            <div
-                className="absolute w-[3px] h-[15px] rounded-lg rotate-[43.5deg] right-[10px] top-[25%]"
+                className="absolute w-[2px] h-[10px] rounded-lg rotate-[50deg] right-[13.5px] top-[33%]"
                 style={{ background: gradient }}
             />
         </div>
@@ -199,14 +199,14 @@ const CertificateCard = ({
       <div
         data-tilt
         data-tilt-glare
-        className="p-[2px] rounded-lg flex h-full max-h-[90px] w-full items-center justify-center"
+        className="rounded-lg flex h-full max-h-[90px] w-full items-center justify-center"
         style={{ background: gradient }}
       >
-        <div className="p-2  max-w-[475px] sm:max-w-[600px] w-full  bg-neutral-700 rounded-lg ">
+        <div className="m-[2px] py-2 px-[10px] max-w-[475px] sm:max-w-[600px] w-full  bg-neutral-700 rounded-lg ">
               <div className="gap-8 flex flex-row justify-between">
                 <div>
-                  <p className="text-wrap text-[14px] font-bold ">{title}</p>
-                  <h1 className="text-[13px] font-semibold ">{platform}</h1>
+                  <p className="text-wrap text-[13px] font-semibold ">{title}</p>
+                  <h1 className="text-[12px] opacity-75">{platform}</h1>
                 </div>
                 <img 
                   src="/icon/certificate.svg" 
@@ -289,12 +289,12 @@ const skillList = [
 const SkillIcon = ({ title, text, src, gradient }: { title: string, text: string; src: string, gradient: string }) => {
   return (
     
-    <div className="flex gap-2 rounded-lg min-w-[175px]" style={{ background: gradient }}>
-      <div className="flex bg-neutral-700 m-[2.5px] p-1 justify-between w-full rounded-lg">
+    <div className="flex gap-2 rounded-lg min-w-[190px]" style={{ background: gradient }}>
+      <div className="flex bg-neutral-700 m-[2px] py-2 px-[10px] justify-between w-full rounded-lg">
         <img src={src} className="z-10 h-[40px]" alt={text} />
         <div className="flex flex-col justify-center items-end">
-            <p className="text-[14px] tracking-[2px] font-bold">{title}</p>
-            <p className="text-[12px] tracking-[2px]">{text}</p>
+            <p className="text-[13px] tracking-[2px] font-semibold">{title}</p>
+            <p className="text-[12px] tracking-[2px] opacity-75">{text}</p>
         </div> 
       </div>
     </div>
@@ -310,10 +310,10 @@ const Work = ({
     <div
       data-tilt
       data-tilt-glare
-      className="p-[3px] rounded-lg flex items-center" 
+      className="rounded-lg flex items-center" 
       style={{ background: gradient }}
     >
-      <div className="h-full p-3 bg-neutral-700 rounded-lg w-full relative flex flex-row gap-2">
+      <div className="h-full m-[2px] py-2 px-[10px] bg-neutral-700 rounded-lg w-full relative flex flex-row gap-2">
         <div className="flex pt-[26px]">
           <div className="flex flex-col items-center">
               <div className="w-[15px] h-[15px] rounded-full" style={{ background: gradient }}></div>
@@ -354,17 +354,18 @@ const WorkCard = ({ company, job, year, skills, gradient }: {
 }) => {
   return (
     <div className="flex flex-row justify-between items-center gap-4">
-      <div className="flex flex-row w-full">
-        {/* <div className="flex flex-col justify-end items-center">
-          <div className="w-[15px] h-[15px] rounded-full" style={{ background: gradient }}></div>
-          <div className="w-[3px] h-[45px] rotate-60 mt-[-1px] mb-[-13px]" style={{ background: gradient }}></div>
-        </div> */}
-        <div className="flex flex-col w-full ">
-          <p className="text-wrap text-[16px] font-semibold">{company}</p>
-          <p className="text-wrap text-[14px] font-normal">{job}</p>
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-1 md:gap-2 pt-1 ">
+      <div className="flex flex-row w-full ">
+
+        <div className="flex flex-col w-full">
+          <p className="text-wrap text-[13px] font-semibold">{company}</p>
+          <p className="text-wrap text-[12px] opacity-75">{job}</p>
+          <div className="flex flex-row flex-wrap gap-1 pt-1  max-w-[420px] md:max-w-none">
             {skills.map((skill, index) => (
-              <div key={index} className="rounded-lg max-w-[75px] sm:max-w-[120px]" style={{ background: gradient }}>
+              <div
+                key={index}
+                className="rounded-lg w-auto"
+                style={{ background: gradient }}
+              >
                 <div className="bg-slate-800 rounded-lg m-[1px] px-2">
                   <p className="text-[10px] sm:text-[12px] text-start">{skill}</p>
                 </div>
@@ -373,7 +374,7 @@ const WorkCard = ({ company, job, year, skills, gradient }: {
           </div>
         </div>
       </div>
-      <p className="min-w-[130px] text-[14px] flex justify-end">{year}</p>
+      <p className="min-w-[130px] text-[12px] flex justify-end">{year}</p>
     </div>
   );
 };
@@ -441,12 +442,12 @@ const ProjectCard = ({
 
   return (
     <div className="flex rounded-lg" style={{ background: gradient }}>
-      <div className="h-full w-full m-[2px] p-2 bg-neutral-700 rounded-lg">
+      <div className="h-full w-full min-h-[100px] m-[2px] py-2 px-[10px] bg-neutral-700 rounded-lg">
         <div className="w-full flex flex-row justify-between items-center">
           <div className="w-full flex flex-row gap-3">
             <div className="w-full flex flex-col">
               <div className="flex flex-row items-center justify-between">
-                <p className="text-wrap text-[14px] font-semibold">{projectName}</p>
+                <p className="text-wrap text-[13px] font-semibold">{projectName}</p>
                 <div className="flex flex-row gap-2">
                   <img 
                     src="/icon/image.svg" 
@@ -462,12 +463,16 @@ const ProjectCard = ({
                   />
                 </div>
               </div>
-              <p className="text-[12px] md:text-[12px] font-thin line-clamp-2">{desc}</p>
-              <div className="flex flex-row gap-2 pt-1">
+              <p className="text-[12px] opacity-75 line-clamp-2">{desc}</p>
+              <div className="flex flex-row flex-wrap gap-1 pt-1 max-w-[420px] md:max-w-none ">
                 {skill.map((item, index) => (
-                  <div key={index} className="rounded-lg" style={{ background: gradient }}>
-                    <div className="m-[1px] px-2 bg-slate-800 rounded-lg">
-                      <p className="text-[10px] md:text-[12px]">{item}</p>
+                  <div
+                    key={index}
+                    className="rounded-lg w-auto"
+                    style={{ background: gradient }}
+                  >
+                    <div className="bg-slate-800 rounded-lg m-[1px] px-2">
+                      <p className="text-[10px] md:text-[12px] break-words">{item}</p>
                     </div>
                   </div>
                 ))}
@@ -481,7 +486,7 @@ const ProjectCard = ({
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
           <div className="rounded-lg shadow-lg relative">
             <button 
-              className="absolute top-[-40px] right-5 text-black text-lg font-bold cursor-customPointer "
+              className="absolute top-[-40px] right-5 text-black  cursor-customPointer "
               onClick={() => setIsModalOpen(false)}
             >
               <div

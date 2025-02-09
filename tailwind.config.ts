@@ -22,6 +22,7 @@ export default {
       },
       fontFamily: {
         teko: ["Teko", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
       cursor: {
         customPointer: 'url("/mouse/mousePointer.svg"), pointer',

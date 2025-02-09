@@ -66,11 +66,11 @@ const Text: React.FC<TextProps> = ({ activeSection, section, text, gradient, han
 
     return (
         <div 
-            className="p-[2px] rounded-lg" 
+            className="rounded-lg" 
             style={activeSection === section ? { background: gradient } : {}}
         >
         <li 
-            className="text-[12px]  sm:text-[16px] p-1 rounded-lg bg-[#171717] cursor-customPointer"
+            className="text-[12px]  sm:text-[16px] m-[2px] py-1 px-[4px] rounded-lg bg-[#171717] cursor-customPointer"
             onClick={handleClick} 
         >
             {text}
