@@ -45,7 +45,7 @@ const Header = ({gradient, activeSection, handleScrollToHome, handleScrollToAbou
             <img 
                 src="/icon/resume.svg" 
                 className="h-[40px] cursor-customPointer"            
-                onClick={() => window.open("https://drive.google.com/file/d/1KW17aI28nyc9BhZdoKYW2oSSlfsLcZk9/view?usp=sharing", "_blank")}
+                onClick={() => window.open("https://drive.google.com/file/d/13Wk-yAF3mrTkecF2efNI3r9cG77nANyX/view?usp=sharing", "_blank")}
             />
         </ul>
     </div>
