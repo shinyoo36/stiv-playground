@@ -3,7 +3,6 @@ import Header from "@/components/main/header";
 import Footer from "@/components/main/footer";
 import MouseTrail from "@/components/main/mouse";
 import XShape from "@/components/main/xShape";
-import Tes from "@/components/main/tes";
 import Foto from "@/components/main/foto";
 import Script from "next/script";
 import { motion, AnimatePresence } from "framer-motion";
