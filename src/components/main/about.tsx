@@ -389,6 +389,14 @@ const Project = ({
     <div className="gap-3 grid grid-cols-1 lg:grid-cols-2 items-center justify-center">
         <ProjectCard
           gradient={gradient}
+          projectName="Manga Verse"
+          desc="A Reponsive Manga and Webtoon Reading Website that use MangaDex data"
+          skill={["React", "Tailwind", "JavaScript", "Express", "MongoDb"]}
+          link="https://mangaverseread.vercel.app/"
+          src="/project/mangaverse.png"
+        />
+        <ProjectCard
+          gradient={gradient}
           projectName="Rumah Hangeul"
           desc="A Responsive Korean Language Learning Website with Bahasa as the main language "
           skill={["React", "Tailwind", "JavaScript", "Spring Boot", "Java", "MaterialUI"]}
